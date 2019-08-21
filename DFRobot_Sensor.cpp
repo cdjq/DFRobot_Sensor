@@ -122,7 +122,6 @@ uint8_t DFRobot_Sensor_IIC::readReg(uint8_t reg, void* pBuf, size_t size)
   for(uint16_t i = 0; i < size; i++){
     _pBuf[i] = _pWire->read();
   }
-  _pWire->endTransmission();
   return size;
 }
 
