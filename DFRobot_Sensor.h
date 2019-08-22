@@ -11,7 +11,7 @@
  * @author [Ouki](ouki.wang@dfrobot.com)
  * @version  V1.0
  * @date  2019-07-13
- * @https://github.com/ouki-wang/DFRobot_Sensor
+ * @url https://github.com/ouki-wang/DFRobot_Sensor
  */
 #ifndef __DFROBOT_SENSOR_H
 #define __DFROBOT_SENSOR_H
