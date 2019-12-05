@@ -17,8 +17,8 @@ import logging
 from ctypes import *
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-#logger.setLevel(logging.FATAL)
+logger.setLevel(logging.INFO)  #显示所有的打印信息
+#logger.setLevel(logging.FATAL)#如果不想显示过多打印，请使用这个选项
 ph = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s - [%(filename)s %(funcName)s]:%(lineno)d - %(levelname)s: %(message)s")
 ph.setFormatter(formatter) 
