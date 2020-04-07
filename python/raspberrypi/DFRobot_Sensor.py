@@ -18,7 +18,7 @@ from ctypes import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)  #显示所有的打印信息
-#logger.setLevel(logging.FATAL)#如果不想显示过多打印，请使用这个选项
+#logger.setLevel(logging.FATAL)#如果不想显示过多打印，只打印错误，请使用这个选项
 ph = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s - [%(filename)s %(funcName)s]:%(lineno)d - %(levelname)s: %(message)s")
 ph.setFormatter(formatter) 
@@ -66,8 +66,15 @@ class DFRobot_Sensor:
   eNomalPrecision = 1<<2, # 正常精度，精度大概在xxx，在正常精度模式下，可以进入低功耗
   eHighPrecision  = 2<<2, # 高精度，精度大概在xxx，在高精度模式下，采集速率会降低，采集周期100ms，不能进入低功耗
   eUltraPrecision = 3<<2, # 超高精度，精度大概在xxx，在超高精度模式下，采集速率会极低，采集周期1000ms，不能进入低功耗
-  
-  class sCombinedData_t(Structure):
+  '''
+   #这里从数据手册上抄写关于这个寄存器的描述
+     # ------------------------------------------------------------------------------------------
+     # |    b7    |    b6    |    b5    |    b4    |    b3    |    b2    |    b1     |    b0    |
+     # ------------------------------------------------------------------------------------------
+     # |                 声音强度                  |                  光线强度                  |
+     # ------------------------------------------------------------------------------------------
+   '''
+  class CombinedData(Structure):
     _pack_ = 1
     _fields_=[('light',c_ubyte,4),
             ('sound',c_ubyte,4)]
@@ -75,17 +82,42 @@ class DFRobot_Sensor:
       self.light = light
       self.sound = sound
 
-  class sColor_t(Structure):
+  class Color(Structure):
     _pack_ = 1
     _fields_=[('b',c_ubyte,5),
-            ('g',c_ubyte,6),
+            ('g1',c_ubyte,3),
+            ('g2',c_ubyte,3),
             ('r',c_ubyte,5)]
     def __init__(self, r=0, g=0, b=0):
-      self.r = r
-      self.g = g
-      self.b = b
+      self.r = r>>3
+      self.g = g>>2
+      self.b = b>>3
+      self.g1 = g>>5
+      self.g2 = (g>>2)&7
 
-  class sMode_t(Structure):
+    def update(self):
+      self.g = self.g1 + self.g2*8
+
+    def set_list(self, data):
+      buf = (c_ubyte * len(data))()
+      for i in range(len(data)):
+        buf[i] = data[i]
+      memmove(addressof(self), addressof(buf), len(data))
+
+    def get_list(self):
+      return list(bytearray(string_at(addressof(self),sizeof(self))))
+
+  '''
+   #这里从数据手册上抄写关于这个寄存器的描述
+     # -----------------------------------------------------------------------------------------
+     # |    b7    |    b6    |    b5    |    b4    |    b3    |    b2   |    b1     |    b0    |
+     # -----------------------------------------------------------------------------------------
+     # |   ready  |         reversed               |      precision     | highspeed | lowpower |
+     # -----------------------------------------------------------------------------------------
+     #
+     #上电后，ready位默认为1，不可更改
+  '''
+  class Mode(Structure):
     _pack_ = 1
     _fields_=[('lowpower',c_ubyte,1), #上电为0，1：低功耗模式 0：正常功耗模式
             ('highspeed',c_ubyte,1),  #上电为0，1：高速模式 0：正常速度模式
@@ -98,12 +130,21 @@ class DFRobot_Sensor:
       self.precision = precision
       self.ready = ready
 
+    def set_list(self, data):
+      buf = (c_ubyte * len(data))()
+      for i in range(len(data)):
+        buf[i] = data[i]
+      memmove(addressof(self), addressof(buf), len(data))
+
+    def get_list(self):
+      return list(bytearray(string_at(addressof(self),sizeof(self))))
+
   def __init__(self, mode):
     self._mode = mode
 
   def begin(self):
-    id=bytearray();
-    if self.readReg(_SENSOR_ADDR_ID,id,1) != 0 :
+    id = self.read_reg(_SENSOR_ADDR_ID)
+    if id == None :
       logger.warning("ERR_DATA_BUS")
       return ERR_DATA_BUS;
 
@@ -111,33 +152,35 @@ class DFRobot_Sensor:
 
     if id[0] != _DFRobot_Sensor_ID:
       return ERR_IC_VERSION;
-  
-    writeReg(SENSOR_ADDR_CONFIG,bytearray([self._mode]),1)
+
+    self.write_reg(_SENSOR_ADDR_CONFIG, [self._mode])
     return ERR_OK;
 
-
   def sound_strength_db(self):
-    data=sCombinedData_t()
-    sefl.readReg(_SENSOR_ADDR_DATA, data, sizeof(data))
+    data=CombinedData()
+    value = self.read_reg(_SENSOR_ADDR_DATA)
+    data.set_list(value)
     logger.info("sound=%d"%(data.sound))
-    return data.sound << 3;
-
+    return data.sound << 3
 
   def light_strength_lux(self):
-    data = sCombinedData_t()
-    self.readReg(_SENSOR_ADDR_DATA, data, sizeof(data))
+    data = CombinedData()
+    value = self.read_reg(_SENSOR_ADDR_DATA)
+    data.set_list(value)
     logger.info("light reg raw data is %d"%(data.light))
-    return data.light * 10000;
+    return data.light * 10000
 
   def set_led(self, r, g, b):
-    data = sColor_t(b=b>>3,g=g>>2,r=r>>3)
-    writeReg(_SENSOR_ADDR_LED, data, 2)
+    data = Color(b=b>>3,g=g>>2,r=r>>3)
+    write_reg(_SENSOR_ADDR_LED, data.get_list())
 
   def set_led(self, color):
-    writeReg(_SENSOR_ADDR_LED, color, 2)
+    data = [color&0xff, (color>>8)&0xff]
+    write_reg(_SENSOR_ADDR_LED, data)
 
   def switch_mode(self, mode)
-    writeReg(SENSOR_ADDR_CONFIG, mode, sizeof(mode));
+    data = [mode&0xff]
+    write_reg(SENSOR_ADDR_CONFIG, data);
 
 
 class DFRobot_Sensor_IIC(DFRobot_Sensor):
@@ -149,8 +192,8 @@ class DFRobot_Sensor_IIC(DFRobot_Sensor):
   def begin(self):
     return super().begin()
 
-  def write_reg(self, reg, buff, size):
-    self.i2cbus.write_i2c_block_data(self.i2c_addr, reg, buff)
+  def write_reg(self, reg, value):
+    self.i2cbus.write_i2c_block_data(self.i2c_addr, reg, value)
 
-  def read_reg(reg, buff, size)
-    buff = self.i2cbus.read_i2c_block_data(self.i2c_addr, register) 
+  def read_reg(self, reg):
+    return self.i2cbus.read_i2c_block_data(self.i2c_addr, reg) 
