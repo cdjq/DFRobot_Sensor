@@ -1,14 +1,12 @@
 """ file DFRobot_Sensor.py
-  #
   # 定义DFRobot_Sensor 类的基础结构，基础方法的实现
-  #
-  # @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  # @licence     The MIT License (MIT)
-  # @author      Alexander(ouki.wang@dfrobot.com)
-  # version  V1.0
-  # date  2017-10-9
-  # @get from https://www.dfrobot.com
-  # @url https://github.com/DFRobot/DFRobot_Sensor
+  @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+  @licence     The MIT License (MIT)
+  @author      Alexander(ouki.wang@dfrobot.com)
+  @version  V1.0
+  @date  2017-10-9
+  @get from https://www.dfrobot.com
+  @url https://github.com/DFRobot/DFRobot_Sensor
 """
 
 import sys
@@ -142,6 +140,10 @@ class DFRobot_Sensor:
   def __init__(self, mode):
     self._mode = mode
 
+  ''' 
+    @brief   开始函数，探测传感器是否正常连接
+    @return  初始化成功，返回ERR_OK，失败返回对应的错误码
+  '''
   def begin(self):
     id = self.read_reg(_SENSOR_ADDR_ID)
     if id == None :
@@ -156,6 +158,10 @@ class DFRobot_Sensor:
     self.write_reg(_SENSOR_ADDR_CONFIG, [self._mode])
     return ERR_OK;
 
+  ''' 
+    @brief   读取声音强度，单位为DB
+    @return  声音强度，单位为DB
+  '''
   def sound_strength_db(self):
     data=CombinedData()
     value = self.read_reg(_SENSOR_ADDR_DATA)
@@ -163,37 +169,76 @@ class DFRobot_Sensor:
     logger.info("sound=%d"%(data.sound))
     return data.sound << 3
 
+  ''' 
+    @brief   读取光线强度，单位为Lux
+    @return  光线强度，单位为Lux
+  '''
   def light_strength_lux(self):
     data = CombinedData()
     value = self.read_reg(_SENSOR_ADDR_DATA)
     data.set_list(value)
     logger.info("light reg raw data is %d"%(data.light))
     return data.light * 10000
-
+  
+  ''' 
+    @brief   设置灯的颜色
+    @param r 红色分量，范围0-255
+    @param g 绿色分量，范围0-255
+    @param b 蓝色分量，范围0-255
+  '''
   def set_led(self, r, g, b):
     data = Color(b=b>>3,g=g>>2,r=r>>3)
     write_reg(_SENSOR_ADDR_LED, data.get_list())
 
+  ''' 
+    @brief   设置灯的颜色
+    @param color RGB565格式的颜色数值
+  '''
   def set_led(self, color):
     data = [color&0xff, (color>>8)&0xff]
     write_reg(_SENSOR_ADDR_LED, data)
 
+  ''' 
+    @brief   切换模式
+    @param mode 模式，参考模式枚举值
+  '''
   def switch_mode(self, mode)
     data = [mode&0xff]
     write_reg(SENSOR_ADDR_CONFIG, data);
 
-
+''' 
+  @brief   IIC接口的Senor模块实例
+'''
 class DFRobot_Sensor_IIC(DFRobot_Sensor):
+  ''' 
+    @brief   开始函数，探测传感器是否正常连接
+    @return  初始化成功，返回ERR_OK，失败返回对应的错误码
+  '''
   def __init__(self, bus, mode):
     self.i2cbus=smbus.SMBus(bus)
     self.i2c_addr = DFRobot_Sensor_IIC_ADDR
     super().__init__(mode)
 
+  ''' 
+    @brief   向寄存器中写入数据
+    @param reg 寄存器地址
+    @param value 写入的数据，list格式
+  '''
   def begin(self):
     return super().begin()
 
+  ''' 
+    @brief   向寄存器中写入数据
+    @param reg 寄存器地址
+    @param value 写入的数据，list格式
+  '''
   def write_reg(self, reg, value):
     self.i2cbus.write_i2c_block_data(self.i2c_addr, reg, value)
-
+  
+  ''' 
+    @brief   从寄存器中读取数据
+    @param reg 寄存器地址
+    @return 读取的数据，list格式
+  '''
   def read_reg(self, reg):
     return self.i2cbus.read_i2c_block_data(self.i2c_addr, reg) 
