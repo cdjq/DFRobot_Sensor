@@ -88,7 +88,7 @@ DFRobot_Sensor_IIC::DFRobot_Sensor_IIC(TwoWire *pWire, uint8_t mode)
 
 int DFRobot_Sensor_IIC::begin(void)
 {
-  Wire.begin();
+  _pWire->begin();
   return DFRobot_Sensor::begin();
 }
 
