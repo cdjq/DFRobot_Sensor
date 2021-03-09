@@ -16,11 +16,7 @@
 #ifndef __DFROBOT_SENSOR_H
 #define __DFROBOT_SENSOR_H
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
 
