@@ -3,9 +3,9 @@
  * @brief 定义DFRobot_Sensor 类的基础结构
  * @n 这是一个虚拟的传感器，IIC地址不可改变,不对应任何实物，可以通过IIC和SPI口来控制它，假设它有下面这些功能
  * @n 向寄存器0里写入数据，点亮不同颜色的LED灯
- * @n 从寄存器1里读出数据，高四位表示光线强度，低四位表示声音强度
- * @n 从寄存器2 bit0里写入数据，写1表示正常模式，写0表示低功耗模式
- * @n 从寄存器3 读取数据，读到的是芯片版本0xDF
+ * @n 从寄存器2里读出数据，高四位表示光线强度，低四位表示声音强度
+ * @n 从寄存器3 bit0里写入数据，写1表示正常模式，写0表示低功耗模式
+ * @n 从寄存器4 读取数据，读到的是芯片版本0xDF
  * @copyright	Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
  * @author [Ouki](ouki.wang@dfrobot.com)
