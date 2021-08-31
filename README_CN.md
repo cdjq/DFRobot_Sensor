@@ -1,5 +1,5 @@
 # DFRobot_Sensor
-- [中文版](./README_CN.md)
+- [English Version](./README.md)
 
 数据手册上抄一下芯片的描述
 
