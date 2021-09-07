@@ -11,7 +11,7 @@ Product images (SVG is not recommended here)
 ![Product Image](https://github.com/cdjq/DFRobot_Sensor/raw/master/resources/images/SEN0245svg1.png)
 
 
-## Product Link(link to DFRobot store)
+## Product Link (Link to DFRobot store)
     SKU: 
 
 ## Table of Contents
