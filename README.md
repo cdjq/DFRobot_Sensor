@@ -1,7 +1,7 @@
 # DFRobot_Sensor
 - [Chinese Version](./README_CN.md)
 
-Copy the relevant description about the chip from datasheet. 
+Copy the relevant description of the chip from the datasheet. 
 
 Write the module introduction here, including the basic functions (Use examples or application scenes to explain what users can do with this product), the advantages of the module (What makes this product worthy buying) and some key terms. 
 
