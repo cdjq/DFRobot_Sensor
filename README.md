@@ -25,7 +25,7 @@ Product images (SVG is not recommended here)
 
 ## Summary
 
-Introduce the basic and special function of the this Arduino Library. 
+Introduce the basic and special functions of this Arduino Library. 
 
 ## Installation
 
