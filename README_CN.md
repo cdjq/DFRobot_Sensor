@@ -11,10 +11,11 @@
 ![正反面svg效果图](https://github.com/cdjq/DFRobot_Sensor/raw/master/resources/images/SEN0245svg1.png)
 
 
-## 产品链接（链接到英文商城）
+## 产品链接（链接到中文商城）
+
     SKU：产品名称
 
-## Table of Contents
+## 目录
 
 * [Summary](#summary)
 * [Installation](#installation)
@@ -23,15 +24,15 @@
 * [History](#history)
 * [Credits](#credits)
 
-## Summary
+## 概述
 
 这里填写当前Arduino软件库完成了基础功能，特色功能
 
-## Installation
+## 安装
 
 To use this library, first download the library file, paste it into the \Arduino\libraries directory, then open the examples folder and run the demo in the folder.
 
-## Methods
+## 方法
 
 ```C++
   /**
@@ -75,9 +76,9 @@ To use this library, first download the library file, paste it into the \Arduino
    void setLED(uint16_t color);
 ```
 
-## Compatibility
+## 兼容性
 
-MCU                | Work Well    | Work Wrong   | Untested    | Remarks
+主板               | 通过  | 未通过   | 未测试   | 备注
 ------------------ | :----------: | :----------: | :---------: | -----
 Arduino uno        |      √       |              |             | 
 Mega2560        |      √       |              |             | 
@@ -86,13 +87,13 @@ ESP32           |      √       |              |             |
 micro:bit        |      √       |              |             | 
 
 
-## History
+## 历史
 
-- data 2019-6-25
-- version V0.1
+- 日期 2019-6-25
+- 版本 V0.1
 
 
-## Credits
+## 创作者
 
 Written by Alexander(ouki.wang@dfrobot.com), 2019. (Welcome to our [website](https://www.dfrobot.com/))
 
