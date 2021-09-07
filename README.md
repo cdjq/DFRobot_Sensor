@@ -1,5 +1,5 @@
 # DFRobot_Sensor
-- [Chinese Version](./README_CN.md)
+- [中文](./README_CN.md)
 
 Copy the relevant description of the chip from the datasheet. 
 
