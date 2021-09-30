@@ -95,7 +95,7 @@ micro:bit        |      √       |              |             |
 ## History
 
 - 2019/06/25 - Version 1.0.0 released.
-
+- 2021/09/30 - Version 1.0.1 released.
 
 ## Credits
 
