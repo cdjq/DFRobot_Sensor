@@ -1,9 +1,8 @@
 /*!
  * @file DFRobot_Sensor.cpp
  * @brief 定义DFRobot_Sensor 类的基础结构，基础方法的实现
- *
  * @copyright	Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license The MIT License (MIT)
  * @author [Ouki](ouki.wang@dfrobot.com)
  * @version  V1.0
  * @date  2019-07-13
@@ -74,25 +73,22 @@ uint8_t DFRobot_Sensor::switchMode(uint8_t mode)
   DBG("after switch Mode, ModeReg = ");
   DBG(tmp);
   #endif
-  /*
-    return 
-  */
 }
 
-DFRobot_Sensor_IIC::DFRobot_Sensor_IIC(TwoWire *pWire, uint8_t mode)
+DFRobot_Sensor_I2C::DFRobot_Sensor_I2C(TwoWire *pWire, uint8_t mode)
   :DFRobot_Sensor(mode)
 {
-  _deviceAddr = DFRobot_Sensor_IIC_ADDR;
+  _deviceAddr = DFRobot_Sensor_I2C_ADDR;
   _pWire = pWire;
 }
 
-int DFRobot_Sensor_IIC::begin(void)
+int DFRobot_Sensor_I2C::begin(void)
 {
   _pWire->begin();
   return DFRobot_Sensor::begin();
 }
 
-void DFRobot_Sensor_IIC::writeReg(uint8_t reg, void* pBuf, size_t size)
+void DFRobot_Sensor_I2C::writeReg(uint8_t reg, void* pBuf, size_t size)
 {
   if(pBuf == NULL){
 	  DBG("pBuf ERROR!! : null pointer");
@@ -107,7 +103,7 @@ void DFRobot_Sensor_IIC::writeReg(uint8_t reg, void* pBuf, size_t size)
   _pWire->endTransmission();
 }
 
-uint8_t DFRobot_Sensor_IIC::readReg(uint8_t reg, void* pBuf, size_t size)
+uint8_t DFRobot_Sensor_I2C::readReg(uint8_t reg, void* pBuf, size_t size)
 {
   if(pBuf == NULL){
     DBG("pBuf ERROR!! : null pointer");

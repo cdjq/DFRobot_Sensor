@@ -8,11 +8,11 @@ Write the module introduction here, including the basic functions (Use examples 
 
 Product images (SVG is not recommended here) 
 
-![Product Image](https://github.com/cdjq/DFRobot_Sensor/raw/master/resources/images/SEN0245svg1.png)
+![Product Image](./resources/images/SEN0245svg1.png)
 
 
 ## Product Link (Link to DFRobot store)
-    SKU: 
+    SKU: XXXX
 
 ## Table of Contents
 
@@ -35,41 +35,47 @@ To use this library, first download the library file, paste it into the \Arduino
 
 ```C++
   /**
+   * @fn begin
    * @brief Init function
    * @return Return 0 if init successful, return non-zero when failed
    */
   int begin(void);
   
   /**
+   * @fn getSoundStrength
    * @brief Get sound intensity 
    * @return Return sound intensity, unit DB
    */
   uint16_t getSoundStrength(void);
 
   /**
+   * @fn getLightStrength
    * @brief Get light intensity 
    * @return Return light intensity, unit lm 
    */
   uint16_t getLightStrength(void);
   
-    /**
+  /**
+   * @fn switchMode
    * @brief Switch mode 
    * @return Return 0 if successful, return non-zero when failed
    */
 
   uint8_t switchMode(uint8_t mode);
   /**
+   * @fn setLED
    * @brief Set LED color 
-     @note  The color setup takes effect after 0.2s 
+   * @note  The color setup takes effect after 0.2s 
    * @param r Red channel color value, range 0-255
    * @param g Green channel color value, range 0-255
    * @param b Blue channel color value, range 0-255
    */
    void setLED(uint8_t r, uint8_t g, uint8_t b);
 
-   /**
+  /**
+   * @fn setLED
    * @brief Set LED Color
-     @note  The color setup takes effect after 0.2s 
+   * @note  The color setup takes effect after 0.2s 
    * @param Color value in rgb565 format 
    */
    void setLED(uint16_t color);
@@ -88,8 +94,7 @@ micro:bit        |      √       |              |             |
 
 ## History
 
-- Data 2019-6-25
-- Version V1.0.0
+- 2019/06/25 - Version 1.0.0 released.
 
 
 ## Credits
