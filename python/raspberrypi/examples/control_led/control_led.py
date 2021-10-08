@@ -5,7 +5,7 @@
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @license     The MIT License (MIT)
   @author      Alexander(ouki.wang@dfrobot.com)
-  @version     V1.0.0
+  @version     V1.0
   @date        2017-10-9
   @url https://github.com/DFRobot/DFRobot_Sensor
 '''
