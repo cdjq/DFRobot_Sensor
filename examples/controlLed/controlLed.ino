@@ -2,12 +2,12 @@
  * @file controlLed.ino
  * @brief 控制LED颜色值
  * @details 实验现象：板载LED灯每秒钟切换一次颜色
- * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @license     The MIT License (MIT)
+ * @copyright Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+ * @license The MIT License (MIT)
  * @author [Ouki](ouki.wang@dfrobot.com)
- * @version  V1.0
- * @date  2019-07-13
- * @url https://github.com/ouki-wang/DFRobot_Sensor
+ * @version V1.0
+ * @date 2019-07-13
+ * @url https://github.com/DFRobot/DFRobot_Sensor
  */
 #include <DFRobot_Sensor.h>
 DFRobot_Sensor_I2C sensor(&Wire, sensor.eLowPower | sensor.eHighSpeed);

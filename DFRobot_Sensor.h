@@ -7,11 +7,11 @@
  * @n 从寄存器3 bit0里写入数据，写1表示正常模式，写0表示低功耗模式
  * @n 从寄存器4 读取数据，读到的是芯片版本0xDF
  * @copyright	Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @license     The MIT License (MIT)
+ * @license The MIT License (MIT)
  * @author [Ouki](ouki.wang@dfrobot.com)
- * @version  V1.0
- * @date  2019-07-13
- * @url https://github.com/ouki-wang/DFRobot_Sensor
+ * @version V1.0
+ * @date 2019-07-13
+ * @url https://github.com/DFRobot/DFRobot_Sensor
  */
 #ifndef __DFROBOT_SENSOR_H
 #define __DFROBOT_SENSOR_H

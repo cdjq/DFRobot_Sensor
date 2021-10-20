@@ -8,7 +8,7 @@ Write the module introduction here, including the basic functions (Use examples 
 
 Product images (SVG is not recommended here) 
 
-![Product Image](./resources/images/SEN0245svg1.png)
+![Product Image](./resources/images/SEN0001.png)
 
 
 ## Product Link (Link to DFRobot store)
@@ -16,12 +16,15 @@ Product images (SVG is not recommended here)
 
 ## Table of Contents
 
-* [Summary](#summary)
-* [Installation](#installation)
-* [Methods](#methods)
-* [Compatibility](#compatibility)
-* [History](#history)
-* [Credits](#credits)
+- [DFRobot_Sensor](#dfrobot_sensor)
+  - [Product Link (Link to DFRobot store)](#product-link-link-to-dfrobot-store)
+  - [Table of Contents](#table-of-contents)
+  - [Summary](#summary)
+  - [Installation](#installation)
+  - [Methods](#methods)
+  - [Compatibility](#compatibility)
+  - [History](#history)
+  - [Credits](#credits)
 
 ## Summary
 

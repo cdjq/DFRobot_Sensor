@@ -36,7 +36,7 @@ def loop():
     setLED函数用于点亮LED，可以通过配置RGB分量，显示特定颜色
       r g b 分量的范围都是0-255
   '''
-  sensor.set_led(/*r=*/50, /*g=*/0,  /*b=*/0)
+  sensor.set_led(50, 0,  0)
   time.sleep(1000)
   sensor.set_led(0,  50, 0)
   time.sleep(1000)

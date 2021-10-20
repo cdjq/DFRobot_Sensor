@@ -7,7 +7,7 @@
  * @author [Ouki](ouki.wang@dfrobot.com)
  * @version  V1.0
  * @date  2019-07-13
- * @url https://github.com/ouki-wang/DFRobot_Sensor
+ * @url https://github.com/DFRobot/DFRobot_Sensor
  */
 #include <DFRobot_Sensor.h>
 // 默认以低功耗模式工作

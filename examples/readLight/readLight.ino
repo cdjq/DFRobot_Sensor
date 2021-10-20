@@ -4,12 +4,11 @@
  * @details 实验现象：每秒读取一次环境光线强度，并打印到串口，给传感器以不同的光照强度，可以得到不同的采集结果
  * @n 由于只有4 bits存放光照强度，最低分辨率1000，所以能采集的范围是 0Lux-150000Lux
  * @copyright	Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @license     The MIT License (MIT)
+ * @license The MIT License (MIT)
  * @author [Ouki](ouki.wang@dfrobot.com)
- * @version  V1.0
- * @date  2019-07-13
- * @get from https://www.dfrobot.com
- * @url https://github.com/ouki-wang/DFRobot_Sensor
+ * @version V1.0
+ * @date 2019-07-13
+ * @url https://github.com/DFRobot/DFRobot_Sensor
  */
 #include <DFRobot_Sensor.h>
 DFRobot_Sensor_I2C sensor(&Wire, eLowPower);
