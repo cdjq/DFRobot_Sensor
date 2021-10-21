@@ -16,15 +16,12 @@ Product images (SVG is not recommended here)
 
 ## Table of Contents
 
-- [DFRobot_Sensor](#dfrobot_sensor)
-  - [Product Link (Link to DFRobot store)](#product-link-link-to-dfrobot-store)
-  - [Table of Contents](#table-of-contents)
-  - [Summary](#summary)
-  - [Installation](#installation)
-  - [Methods](#methods)
-  - [Compatibility](#compatibility)
-  - [History](#history)
-  - [Credits](#credits)
+  * [Summary](#summary)
+  * [Installation](#installation)
+  * [Methods](#methods)
+  * [Compatibility](#compatibility)
+  * [History](#history)
+  * [Credits](#credits)
 
 ## Summary
 
